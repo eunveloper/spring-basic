@@ -1,0 +1,13 @@
+[스프링 컨테이너 생성]
+"ApplicationContext applicationContext = new AnnotationConfigApplicationContext(AppConfig.class);"
+- ApplicationContext를 스프링 컨테이너라 한다.
+- ApplicationContext는 인터페이스이다.
+- 자바 설정 클래스를 기반으로 스프링 컨테이너를 만들게 되면
+new AnnotationConfigApplicationContext를 통하여 애노테이션 기반 자바 설정 클래스를 생성한다.
+
+* 빈의 이름은 항상 다른 이름을 부여하자!
+같은 이름을 부여하면, 다른 빈이 무시되거나, 기존 빈을 덮어버리거나 설정에 오류가 발생한다.
+
+- 스프링 컨테이너는 설정 정보를 참고해서 의존관계를 주입(DI) 한다.
+- 스프링은 빈을 생성하고, 의존관계를 주입하는 단계가 나누어져 있다.
+- 그런데 자바 코드로 스프링 빈을 등록하면 생성자를 호출하면서 의존관계 주입도 한번에 처리된다.
