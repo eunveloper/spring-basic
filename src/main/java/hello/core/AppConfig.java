@@ -9,12 +9,16 @@ import hello.core.member.MemberServiceImpl;
 import hello.core.member.MemoryMemberRepository;
 import hello.core.order.OrderService;
 import hello.core.order.OrderServiceImpl;
+import org.springframework.context.annotation.Bean;
+import org.springframework.context.annotation.Configuration;
 
+@Configuration  // 구성정보를 담는다는 의미의 Annotation
 public class AppConfig {
 
     // 객체이 생성과 연결은 AppConfig 가 담당한다.
     // MemberServiceImpl 은 MemberRepository 인 추상에만 의존하면 된다.
 
+    @Bean   // 스프링 컨테이너에 등록됨
     public MemberService memberService() {
         return new MemberServiceImpl(memberRepository());
         // 생성자 주입 방식
@@ -22,18 +26,21 @@ public class AppConfig {
         // 의존관계를 마치 외부에서 주입해주는 것 같다고 해서 DI 우리말로 의존관계 주입이라고 한다.
     }
 
+    @Bean
     public OrderService orderService() {
         return new OrderServiceImpl(memberRepository(), discountPolicy());
     }
 
-    private MemberRepository memberRepository() {
+    @Bean
+    public MemberRepository memberRepository() {
         return new MemoryMemberRepository();
         // 역할을 한번더 구분하여 만듬으로서 정책이 바뀌면 해당 부분만 변경하면 된다.
         // 예를들어 새로운 Member 용 데이터베이스가 생겨 기능이 변경되어야 하면
         // 이 메소드에서 리턴하는 구현클래스만 변경해주면 된다!
     }
 
-    private DiscountPolicy discountPolicy() {
+    @Bean
+    public DiscountPolicy discountPolicy() {
         // return new FixDiscountPolicy();
         return new RateDiscountPolicy();
         // 할인 정책이 바뀐다면 이 부분만 변경해주면 된다! - OCP
