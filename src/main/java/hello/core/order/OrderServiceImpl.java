@@ -18,6 +18,11 @@ public class OrderServiceImpl implements OrderService {
         this.discountPolicy = discountPolicy;
     }
 
+    // 테스트 용도
+    public MemberRepository getMemberRepository() {
+        return memberRepository;
+    }
+
     // private final DiscountPolicy discountPolicy = new FixDiscountPolicy();
     // private final DiscountPolicy discountPolicy = new RateDiscountPolicy();
     /* 추상(인터페이스)의존과 더불어 구체(구현클래스)도 함께 의존한다. 이는 DIP 위반!
