@@ -9,6 +9,11 @@ public class MemberServiceImpl implements MemberService{
     }
     // 이제 구현클래스에 의존하지 않고 오로지 인터페이스에 의존하는 구조로 변경되었음.
 
+    // 테스트 용도
+    public MemberRepository getMemberRepository() {
+        return memberRepository;
+    }
+
     @Override
     public void join(Member member) {
         memberRepository.save(member);
