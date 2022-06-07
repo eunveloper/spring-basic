@@ -33,9 +33,9 @@ import org.springframework.context.annotation.FilterType;
 // 5. @Configuration : 스프링 설정 정보에서 사용
 public class AutoAppConfig {
 
-    @Bean(name = "memoryMemberRepository")
+    /* @Bean(name = "memoryMemberRepository")
     public MemberRepository memberRepository() {
         return new MemoryMemberRepository();
-    }
+    } */
 
 }
