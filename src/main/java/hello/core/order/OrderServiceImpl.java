@@ -6,11 +6,13 @@ import hello.core.discount.RateDiscountPolicy;
 import hello.core.member.Member;
 import hello.core.member.MemberRepository;
 import hello.core.member.MemoryMemberRepository;
+import lombok.RequiredArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.ComponentScan;
 import org.springframework.stereotype.Component;
 
 @Component
+@RequiredArgsConstructor    // final이 달린 변수들의 생성자를 자동으로 만들어
 public class OrderServiceImpl implements OrderService {
 
     /* 필드 주입
@@ -23,6 +25,8 @@ public class OrderServiceImpl implements OrderService {
     @Autowired
     private /*final*/ MemberRepository memberRepository;
 
+    // @Autowired 는 타입으로 조회한다.  ac.getBean(DiscountPolicy.class)  9_meme.txt
+    // 동일한 타입의 빈이 두개라면? expected single matching bean but found 2: fixDiscountPolicy,rateDiscountPolicy 에러 발생!!
     @Autowired
     private /*final*/ DiscountPolicy discountPolicy;
     // 인터페이스에만 의존! - DIP
@@ -31,7 +35,7 @@ public class OrderServiceImpl implements OrderService {
     public OrderServiceImpl(MemberRepository memberRepository, DiscountPolicy discountPolicy) {
         /* 생성자 주입
          이름 그대로 생성자를 통해서 의존 관계를 주입 받는 방법
-         생성자 호출 시점에 딱 한번만 호출되는 것이 보장
+         생성자 호출 시점에 딱 한번만 호출는 것이 보장ㄹ
          불변, 필수 의존관계에 사용된다.
          코드를 잘보면 외부에서 memberRepository 등을 변경할 방법이 없다.
          스프링이 빈을 등록하기 위해서 객제를 생성할 때 호출되고, 그때 의존성 주입이 일어남 */
