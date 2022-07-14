@@ -21,13 +21,16 @@ configurations {
 
 dependencies {
 	implementation 'org.springframework.boot:spring-boot-starter'
+	implementation 'javax.inject:javax.inject:1'
+	implementation 'org.springframework.boot:spring-boot-starter-web'
 	compileOnly 'org.projectlombok:lombok'
 	annotationProcessor 'org.projectlombok:lombok'
 	testCompileOnly 'org.projectlombok:lombok'
 	testAnnotationProcessor 'org.projectlombok:lombok'
 	testImplementation('org.springframework.boot:spring-boot-starter-test') {
 		exclude group: 'org.junit.vintage', module: 'junit-vintage-engine'
-	} }
+	}
+}
 
 tasks.named('test') {
 	useJUnitPlatform()
